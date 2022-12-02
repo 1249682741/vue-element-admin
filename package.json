@@ -13,6 +13,7 @@
     "@vueuse/core": "^9.5.0",
     "axios": "^1.2.0",
     "element-plus": "^2.2.22",
+    "normalize.css": "^8.0.1",
     "pinia": "^2.0.24",
     "sass": "^1.56.1",
     "unplugin-icons": "^0.14.14",

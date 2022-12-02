@@ -1,5 +1,5 @@
 <script setup lang="ts" name="layout">
-import { Navbar, AppMain, Sidebar } from './components'
+import { Navbar, AppMain, Sidebar, TagsView } from './components'
 </script>
 
 <template>
@@ -9,6 +9,7 @@ import { Navbar, AppMain, Sidebar } from './components'
     </div>
     <div class="rt-wrap">
       <navbar />
+      <tags-view />
       <app-main />
     </div>
   </div>

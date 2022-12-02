@@ -4,6 +4,7 @@ import { type CustomerRouteRecordRaw } from '@/router'
 import SidebarIcon from '../icon/index.vue'
 import SidebarLink from '../link/index.vue'
 import { isExternal } from '@/utils/validate'
+import { resolve } from '@/utils'
 
 type Props = {
   item: CustomerRouteRecordRaw
@@ -17,18 +18,6 @@ const isSingleRoute = ref<boolean>(true)
 const singleRoute = ref<CustomerRouteRecordRaw>(props.item)
 const multipleRoute = ref<CustomerRouteRecordRaw>(props.item)
 const currentPath = ref<string>('')
-
-const resolve = (parentPath: string, childrenPath: string): string => {
-  if (!parentPath.endsWith('/')) {
-    parentPath += '/'
-  }
-
-  if (childrenPath.startsWith('/')) {
-    childrenPath = childrenPath.substring(1)
-  }
-
-  return parentPath + childrenPath
-}
 
 const init = (route: CustomerRouteRecordRaw, basePath: string) => {
   // 若路由为 hidden 则 直接return
@@ -46,7 +35,7 @@ const init = (route: CustomerRouteRecordRaw, basePath: string) => {
   // 下面是有 children 的情况
   // 当下子孩的长度为 1 且 当前节点 alwaysShow 不为 true, 则直接展示单节点
   if (route.children.length == 1 && !route.alwaysShow) {
-    init(route.children[0], resolvePath)
+    init(route.children[0] as CustomerRouteRecordRaw, resolvePath)
   } else {
     // 子孩长度大于 1 或 当前节点是 alwaysShow 的情况, 则直接展示多节点
     isSingleRoute.value = false
@@ -63,7 +52,9 @@ init(props.item, props.basePath)
     <sidebar-link v-if="isSingleRoute" :to="currentPath">
       <el-menu-item :index="currentPath">
         <sidebar-icon :icon="singleRoute?.meta?.icon" />
-        <template #title>{{ singleRoute?.meta?.title }}</template>
+        <template #title>
+          <span>{{ singleRoute?.meta?.title }}</span>
+        </template>
       </el-menu-item>
     </sidebar-link>
 

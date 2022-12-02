@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useAppSettingStore, useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import Breadcrumb from './breadcrumb/index.vue'
 
 const appSettingStore = useAppSettingStore()
 const { isMenuCollapse } = storeToRefs(appSettingStore)
@@ -16,20 +17,28 @@ const { userName } = storeToRefs(userStore)
 
 <template>
   <nav class="nav-wrap">
-    <el-icon :size="20" @click="appSettingStore.toggleMenuStatus">
-      <component :is="iconName" />
-    </el-icon>
+    <div class="lf-wrap">
+      <el-icon class="icon" :size="25" color="#333" @click="appSettingStore.toggleMenuStatus">
+        <component :is="iconName" />
+      </el-icon>
+      <breadcrumb />
+    </div>
     <div>
       <el-dropdown>
-        <span>
-          {{ userName }}
+        <p class="dropdown-wrap">
+          <span class="name">
+            {{ userName }}
+          </span>
           <el-icon>
             <arrow-down />
           </el-icon>
-        </span>
+        </p>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="userStore.logout">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="userStore.logout">修改信息</el-dropdown-item>
+          </el-dropdown-menu>
+          <el-dropdown-menu>
+            <el-dropdown-item divided @click="userStore.logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -39,10 +48,27 @@ const { userName } = storeToRefs(userStore)
 
 <style scoped lang="scss">
 .nav-wrap {
-  padding: 5px 10px;
+  padding: 0 15px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  box-shadow: 0 1px 0 0 #f8f8f8;
+  align-items: center;
+  box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+}
+.lf-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .icon {
+    margin: 0 20px 0 0;
+  }
+}
+.dropdown-wrap {
+  display: flex;
+  flex-direction: row;
+  span {
+    margin: 0 10px 0 0;
+  }
 }
 </style>
