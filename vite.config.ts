@@ -7,7 +7,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 const pathSrc = path.resolve(__dirname, 'src')
-console.log('pathSrc', pathSrc)
 
 export default defineConfig({
   resolve: {

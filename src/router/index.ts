@@ -52,6 +52,16 @@ const constantRoutes: CustomerRouteRecordRaw[] = [
     ],
   },
   {
+    path: '/sys',
+    name: 'sys',
+    meta: { title: '系统管理' },
+    component: Layout,
+    children: [
+      { path: 'user', name: 'user', meta: { title: '用户管理' }, component: () => import('@/views/sys/user/index.vue') },
+      { path: 'menu', name: 'menu', meta: { title: '菜单管理' }, component: () => import('@/views/sys/menu/index.vue') },
+    ],
+  },
+  {
     path: '/b',
     name: 'b',
     meta: { title: 'bbbb' },

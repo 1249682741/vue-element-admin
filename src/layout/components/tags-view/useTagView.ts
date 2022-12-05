@@ -91,7 +91,6 @@ export default function useTagView() {
     let tagWidth = tagEl.offsetWidth
     let wrap = document.getElementsByClassName('tags-view-wrap')[0] as HTMLElement
     let wrapWidth = wrap.offsetWidth
-    console.log(tagLeft, wrapWidth)
     let scroll = tagWidth + tagLeft - wrapWidth
     if (scroll < 0) return
     // scrollbar 移动

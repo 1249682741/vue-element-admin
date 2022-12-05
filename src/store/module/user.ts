@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
-
+import { Storage } from '@/utils/storage'
 type UserStore = {
   userName: string
+  token: string
 }
 
 export const useUserStore = defineStore({
@@ -9,6 +10,7 @@ export const useUserStore = defineStore({
   state(): UserStore {
     return {
       userName: 'pikachu',
+      token: '',
     }
   },
   actions: {
