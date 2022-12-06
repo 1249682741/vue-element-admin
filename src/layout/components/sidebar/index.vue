@@ -22,7 +22,7 @@ const routes = ref(router.options.routes)
 $menu-width: 230px;
 .layout-menu-wrap {
   width: $menu-width;
-  min-height: 100vh;
+  min-height: 100%;
   overflow-x: hidden;
   &.el-menu--collapse {
     width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);

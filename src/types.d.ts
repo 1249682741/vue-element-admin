@@ -7,3 +7,16 @@ declare type PageProps = {
   pageSize: number
   total: number
 }
+
+// CustomerForm 组件需要的config prop
+declare type FormConfig = {
+  label: string
+  prop: string
+  type: string
+  options?: any[]
+  optionLabel?: string
+  optionValue?: string
+  disabled?: boolean
+  readonly?: boolean
+  required?: boolean
+}

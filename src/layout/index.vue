@@ -20,6 +20,7 @@ import { Navbar, AppMain, Sidebar, TagsView } from './components'
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+  overflow-x: hidden;
   .lf-wrap {
     flex: 0 0 auto;
   }

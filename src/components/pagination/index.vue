@@ -12,7 +12,15 @@ const props = withDefaults(defineProps<PageProps>(), {
   pageSize: 10,
 })
 
-const { pageNum, pageSize } = useVModels(props)
+type Emit = {
+  (e: 'update:pageNum', pageNum: number): void
+  (e: 'update:pageSize', pageSize: number): void
+  (e: 'pagination'): void
+}
+
+const emit = defineEmits<Emit>()
+
+const { pageNum, pageSize } = useVModels(props, emit)
 
 const updateCurrentPage = (...args: any[]) => {
   console.log('updateCurrentPage', ...args)
@@ -20,6 +28,7 @@ const updateCurrentPage = (...args: any[]) => {
 
 const updatePageSize = (...args: any[]) => {
   console.log('updatePageSize', ...args)
+  // emit('pagination')
 }
 </script>
 
