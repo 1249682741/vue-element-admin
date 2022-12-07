@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CustomerForm: typeof import('./src/components/customer-form/index.vue')['default']
     CustomForm: typeof import('./src/components/custom-form/index.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
@@ -30,14 +29,9 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    Form: typeof import('./src/components/form/index.vue')['default']
-    IEpArrowDown: typeof import('~icons/ep/arrow-down')['default']
-    IEpExpand: typeof import('~icons/ep/expand')['default']
-    IEpFold: typeof import('~icons/ep/fold')['default']
     Pagination: typeof import('./src/components/pagination/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Undefined: typeof import('./src/components/index.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

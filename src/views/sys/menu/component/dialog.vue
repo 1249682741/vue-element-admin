@@ -29,7 +29,7 @@ const onSubmit = () => {
 <template>
   <el-dialog append-to-body v-model="visible" :title="title" draggable>
     <custom-form :config="config" v-model:data="data">
-      <!-- <tree></tree> -->
+      <!-- <tree node-key="id" /> -->
     </custom-form>
     <template #footer>
       <span class="dialog-footer">

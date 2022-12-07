@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordName, type RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
 import Login from '@/views/login/index.vue'
 
@@ -29,7 +29,7 @@ export type CustomerRouteMeta = {
 }
 
 export type CustomerRouteRecordRaw = RouteRecordRaw & {
-  name?: string
+  name?: RouteRecordName
   hidden?: boolean
   alwaysShow?: boolean
   meta?: CustomerRouteMeta
@@ -38,18 +38,9 @@ export type CustomerRouteRecordRaw = RouteRecordRaw & {
 const constantRoutes: CustomerRouteRecordRaw[] = [
   {
     path: '/',
+    redirect: '/home',
     component: Layout,
-    meta: { title: 'aaaa' },
-    alwaysShow: true,
-    redirect: '/b',
-    children: [
-      {
-        path: 'a',
-        name: 'a',
-        meta: { title: '哇哈哈' },
-        component: Login,
-      },
-    ],
+    children: [{ path: 'home', name: 'home', meta: { title: '首页' }, component: () => import('@/views/home/index.vue') }],
   },
   {
     path: '/sys',
@@ -59,84 +50,6 @@ const constantRoutes: CustomerRouteRecordRaw[] = [
     children: [
       { path: 'user', name: 'user', meta: { title: '用户管理' }, component: () => import('@/views/sys/user/index.vue') },
       { path: 'menu', name: 'menu', meta: { title: '菜单管理' }, component: () => import('@/views/sys/menu/index.vue') },
-    ],
-  },
-  {
-    path: '/b',
-    name: 'b',
-    meta: { title: 'bbbb' },
-    component: Layout,
-    children: [
-      {
-        path: 'b-1',
-        name: 'b-1',
-        meta: { title: 'b-哈哈哈1' },
-        component: Login,
-      },
-      {
-        path: 'b-2',
-        name: 'b-2',
-        meta: { title: 'b-哈哈哈2' },
-        component: Login,
-      },
-    ],
-  },
-  {
-    path: '/c',
-    name: 'c',
-    component: Layout,
-    alwaysShow: true,
-    meta: { title: 'cccc' },
-    children: [
-      {
-        path: 'c-1',
-        name: 'c-1',
-        meta: { title: 'c--1' },
-        component: Login,
-        children: [
-          {
-            path: 'b1',
-            name: 'c-1-b1',
-            meta: { title: '啊啊啊1' },
-            component: Login,
-          },
-          {
-            path: 'b2',
-            name: 'c-1-b2',
-            meta: { title: '啊啊啊2' },
-            component: Login,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: '/d',
-    name: 'd',
-    component: Layout,
-    alwaysShow: true,
-    meta: { title: 'dd' },
-    children: [
-      {
-        path: 'd-1',
-        name: 'd-1',
-        meta: { title: 'd--1' },
-        component: Login,
-        children: [
-          {
-            path: 'd1',
-            name: 'd-1-b1',
-            meta: { title: '呜呜呜1' },
-            component: Login,
-          },
-          {
-            path: 'd2',
-            name: 'd-1-b2',
-            meta: { title: '呜呜呜2' },
-            component: Login,
-          },
-        ],
-      },
     ],
   },
   {
