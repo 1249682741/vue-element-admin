@@ -1,9 +1,7 @@
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { ElMessageBox } from 'element-plus'
-import { add, edit, del } from '@/api/sys/menu'
-
-type DialogType = 'add' | 'edit'
+import { add, edit, del } from '@/api/sys/user'
 
 export function useDialog() {
   const dialogType = ref<DialogType>('add')
@@ -12,10 +10,6 @@ export function useDialog() {
   const handleRowData = ref()
 
   const showDialog = (type: DialogType, row?: any) => {
-    let obj = {
-      add: '新增',
-      edit: '编辑',
-    }
     dialogType.value = type
     dialogVisible.value = true
   }

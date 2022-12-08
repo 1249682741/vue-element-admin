@@ -1,11 +1,11 @@
-<script lang="ts" setup name="user">
+<script lang="ts" setup>
 import { onMounted } from 'vue'
 import CustomDialog from './component/dialog.vue'
 import { useDialog } from './useDialog'
 import { useTable } from './useTable'
 import { useSearch } from './useSearch'
 
-const { page, tableData, tableLoading, tableConfig, getListData, load } = useTable()
+const { page, tableData, tableLoading, tableConfig, getListData } = useTable()
 const { searchConfig, searchData, onSearch } = useSearch({ getListData, page })
 const { dialogType, dialogVisible, dialogData, showDialog, submit, onDelete } = useDialog()
 
@@ -26,15 +26,7 @@ onMounted(() => {
     </custom-form>
   </div>
 
-  <el-table
-    :data="tableData"
-    v-loading="tableLoading"
-    border
-    row-key="id"
-    lazy
-    :load="load"
-    :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-  >
+  <el-table :data="tableData" v-loading="tableLoading" border>
     <el-table-column v-for="item in tableConfig" :key="item.prop" :label="item.label" :prop="item.prop" />
     <el-table-column label="操作">
       <template #default="scope">

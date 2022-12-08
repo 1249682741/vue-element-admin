@@ -7,18 +7,12 @@ type DialogType = 'add' | 'edit'
 
 export function useDialog() {
   const dialogType = ref<DialogType>('add')
-  const dialogTitle = ref<string>('')
   const dialogVisible = ref<boolean>(false)
   const dialogData = ref({})
   const handleRowData = ref()
 
   const showDialog = (type: DialogType, row?: any) => {
-    let obj = {
-      add: '新增',
-      edit: '编辑',
-    }
     dialogType.value = type
-    dialogTitle.value = obj[type]
     dialogVisible.value = true
   }
 
@@ -26,7 +20,7 @@ export function useDialog() {
     handleRowData.value = row
     ElMessageBox.confirm('确定要删除该信息么？', '提示', {
       confirmButtonText: '确定',
-      cancelButtonText: '删除',
+      cancelButtonText: '取消',
       type: 'warning',
       draggable: true,
     })
@@ -62,7 +56,7 @@ export function useDialog() {
   }
 
   return {
-    dialogTitle,
+    dialogType,
     dialogVisible,
     dialogData,
     showDialog,

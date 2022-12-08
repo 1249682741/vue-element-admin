@@ -1,6 +1,6 @@
 <script lang="ts" setup name="custom-form">
 import { ref } from 'vue'
-import { isInput, isSelect } from '@/utils/validate'
+import { isInput, isSelect, isRadio } from '@/utils/validate'
 import { useVModel } from '@vueuse/core'
 
 type Props = {
@@ -28,8 +28,19 @@ const data = useVModel(props, 'data', emit)
       <el-input v-if="isInput(item.type)" v-model="data[item.prop]" />
 
       <el-select v-if="isSelect(item.type)" v-model="data[item.prop]">
-        <el-option v-for="o in item.options" :key="o[item?.optionValue ?? defaultOptionValue]" :label="o[item?.optionLabel ?? defaultOptionLabel]" />
+        <el-option
+          v-for="o in item.options"
+          :key="o[item?.optionValue ?? defaultOptionValue]"
+          :label="o[item?.optionLabel ?? defaultOptionLabel]"
+          :value="o[item?.optionValue ?? defaultOptionValue]"
+        />
       </el-select>
+
+      <el-radio-group v-if="isRadio(item.type)" v-model="data[item.prop]">
+        <el-radio v-for="o in item.options" :key="o[item?.optionValue ?? defaultOptionValue]" :label="o[item?.optionValue ?? defaultOptionValue]">
+          {{ o[item?.optionLabel ?? defaultOptionLabel] }}
+        </el-radio>
+      </el-radio-group>
     </el-form-item>
     <slot name="footer"></slot>
   </el-form>

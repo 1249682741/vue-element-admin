@@ -8,7 +8,7 @@ import { resolve } from '@/utils'
 
 type Props = {
   item: CustomerRouteRecordRaw
-  basePath: string
+  basePath?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   basePath: '',

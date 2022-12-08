@@ -7,7 +7,7 @@ import { useSearch } from './useSearch'
 
 const { page, tableData, tableLoading, tableConfig, getListData } = useTable()
 const { searchConfig, searchData, onSearch } = useSearch({ getListData, page })
-const { dialogTitle, dialogVisible, dialogData, showDialog, submit, onDelete } = useDialog()
+const { dialogType, dialogVisible, dialogData, showDialog, submit, onDelete } = useDialog()
 
 onMounted(() => {
   getListData()
@@ -37,5 +37,5 @@ onMounted(() => {
   </el-table>
   <Pagination v-model:pageNum="page.pageNum" v-model:pageSize="page.pageSize" :total="page.total" @pagination="getListData" />
 
-  <custom-dialog v-model:visible="dialogVisible" :title="dialogTitle" @submit="submit" v-model:data="dialogData" />
+  <custom-dialog v-model:visible="dialogVisible" :type="dialogType" @submit="submit" v-model:data="dialogData" />
 </template>

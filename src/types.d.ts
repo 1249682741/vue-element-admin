@@ -20,3 +20,6 @@ declare type FormConfig = {
   readonly?: boolean
   required?: boolean
 }
+
+// dialog的操作类型
+type DialogType = 'add' | 'edit'

@@ -26,7 +26,7 @@ export function useDialog() {
     handleRowData.value = row
     ElMessageBox.confirm('确定要删除该信息么？', '提示', {
       confirmButtonText: '确定',
-      cancelButtonText: '删除',
+      cancelButtonText: '取消',
       type: 'warning',
       draggable: true,
     })

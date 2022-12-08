@@ -26,9 +26,6 @@ export function useTable() {
         pageSize: page.pageSize,
       })
       tableData.value = result.list
-      page.pageNum = result.pageNum
-      page.pageSize = result.pageSize
-      page.total = result.total
     } catch (err) {
     } finally {
       tableLoading.value = false

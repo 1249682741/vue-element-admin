@@ -12,7 +12,7 @@
     "@element-plus/icons-vue": "^2.0.10",
     "@vueuse/core": "^9.5.0",
     "axios": "^1.2.0",
-    "element-plus": "^2.2.22",
+    "element-plus": "^2.2.26",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.24",
     "pinia-plugin-persist": "^1.0.0",

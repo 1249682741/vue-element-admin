@@ -2,7 +2,7 @@
 import { ref, readonly } from 'vue'
 import { useVModels } from '@vueuse/core'
 type Props = {
-  title: string
+  type: DialogType
   visible: boolean
   data: any
 }
@@ -20,6 +20,12 @@ const config = readonly([
   { label: '姓名', prop: 'name', type: 'text' },
   { label: '电话', prop: 'phone', type: 'text' },
 ])
+
+const titleObj = {
+  add: '新增',
+  edit: '编辑',
+}
+const title = ref<string>(titleObj[props.type])
 
 const onSubmit = () => {
   emit('submit')

@@ -14,6 +14,12 @@ export const useUserStore = defineStore({
   },
   actions: {
     login() {},
-    logout() {},
+    logout() {
+      this.initState()
+    },
+    initState() {
+      this.userName = ''
+      this.token = ''
+    }
   },
 })

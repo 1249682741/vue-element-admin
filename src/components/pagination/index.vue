@@ -47,6 +47,8 @@ const updatePageSize = (...args: any[]) => {
 
 <style scoped lang="scss">
 .page {
-  margin-top: 15px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 </style>
