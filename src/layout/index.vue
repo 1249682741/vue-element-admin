@@ -1,13 +1,11 @@
 <script setup lang="ts" name="layout">
-import { Navbar, AppMain, Sidebar, TagsView } from './components'
+import { Navbar, AppMain, TagsView, Sidebar } from './components'
 </script>
 
 <template>
   <div class="layout-wrap">
-    <div class="lf-wrap">
-      <sidebar />
-    </div>
-    <div class="rt-wrap">
+    <sidebar />
+    <div class="layout-content-wrap">
       <navbar />
       <tags-view />
       <app-main />
@@ -17,17 +15,11 @@ import { Navbar, AppMain, Sidebar, TagsView } from './components'
 
 <style scoped lang="scss">
 .layout-wrap {
-  min-height: 100vh;
   display: flex;
-  flex-direction: row;
-  overflow-x: hidden;
-  .lf-wrap {
-    flex: 0 0 auto;
-  }
-  .rt-wrap {
+  overflow: hidden;
+  .layout-content-wrap {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
   }
 }
 </style>

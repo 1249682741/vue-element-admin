@@ -49,7 +49,7 @@ const { userName } = storeToRefs(userStore)
 <style scoped lang="scss">
 .nav-wrap {
   padding: 0 15px;
-  height: 50px;
+  height: $layout-navbar-height;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

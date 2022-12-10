@@ -1,7 +1,13 @@
 :root {
+
   // sidebar
+  
   --el-menu-bg-color: #304156;
   --el-menu-text-color: #bfcbd9;
   --active-color: #409eff;
   --el-menu-hover-bg-color: #263445;
 }
+
+$layout-menu-width: 230px;
+$layout-navbar-height: 50px;
+$layout-tags-view-height: 34px;

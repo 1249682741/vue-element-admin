@@ -18,6 +18,13 @@ export default defineConfig({
       },
     ],
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/style/variables.scss";',
+      },
+    },
+  },
   plugins: [
     vue(),
     AutoImport({

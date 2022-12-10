@@ -82,7 +82,7 @@ onMounted(() => {
 $tags-view-active-bg: #42b983;
 .tags-view-wrap {
   width: 100%;
-  height: 34px;
+  height: $layout-tags-view-height;
   background: #fff;
   box-shadow: 0 1px 3px 0 #0000001f, 0 0 3px 0 rgb(0 0 0 / 4%);
   .tags-view-item {

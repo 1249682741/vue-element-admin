@@ -13,6 +13,7 @@ export function useTable() {
   const tableConfig = readonly([
     { label: '姓名', prop: 'name' },
     { label: '电话', prop: 'phone' },
+    { label: '角色', prop: 'roleName' },
   ])
 
   /**

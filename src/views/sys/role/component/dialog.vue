@@ -107,6 +107,7 @@ watch(visible, (val) => {
 
 const onSubmit = () => {
   let ids = getCheckedKeys()
+  console.log('ids', ids)
   emit('submit')
 }
 </script>
