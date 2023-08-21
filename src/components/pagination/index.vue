@@ -1,5 +1,6 @@
 <script lang="ts" setup name="pagination">
 import { useVModels } from '@vueuse/core'
+import { watch } from 'vue'
 
 type PageProps = {
   pageNum: number
@@ -12,23 +13,19 @@ const props = withDefaults(defineProps<PageProps>(), {
   pageSize: 10,
 })
 
-type Emit = {
+const emits = defineEmits<{
   (e: 'update:pageNum', pageNum: number): void
   (e: 'update:pageSize', pageSize: number): void
   (e: 'pagination'): void
+}>()
+
+const { pageNum, pageSize } = useVModels(props, emits)
+
+function changePageSize() {
+  emits('pagination')
 }
-
-const emit = defineEmits<Emit>()
-
-const { pageNum, pageSize } = useVModels(props, emit)
-
-const updateCurrentPage = (...args: any[]) => {
-  console.log('updateCurrentPage', ...args)
-}
-
-const updatePageSize = (...args: any[]) => {
-  console.log('updatePageSize', ...args)
-  // emit('pagination')
+function changePageNum() {
+  emits('pagination')
 }
 </script>
 
@@ -38,10 +35,10 @@ const updatePageSize = (...args: any[]) => {
     background
     layout="total, sizes, prev, pager, next"
     :total="total"
-    :page-size="pageSize"
-    :current-page="pageNum"
-    @update:current-page="updateCurrentPage"
-    @update:page-size="updatePageSize"
+    v-model:page-size="pageSize"
+    v-model:current-page="pageNum"
+    @size-change="changePageSize"
+    @current-change="changePageNum"
   />
 </template>
 

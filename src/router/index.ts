@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordName, type RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import Redirect from '@/layout/redirect.vue'
 import Login from '@/views/login/index.vue'
 
 /**
@@ -20,27 +21,18 @@ import Login from '@/views/login/index.vue'
   }
  */
 
-export type CustomerRouteMeta = {
-  title?: string
-  icon?: string
-  affix?: boolean
-  noCache?: boolean
-  breadcrumb?: boolean
-}
-
-export type CustomerRouteRecordRaw = RouteRecordRaw & {
-  name?: RouteRecordName
-  hidden?: boolean
-  alwaysShow?: boolean
-  meta?: CustomerRouteMeta
-}
-
-const constantRoutes: CustomerRouteRecordRaw[] = [
+const constantRoutes: CustomRouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/home',
     component: Layout,
     children: [{ path: 'home', name: 'home', meta: { title: '首页' }, component: () => import('@/views/home/index.vue') }],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    hidden: true,
+    component: Login,
   },
   {
     path: '/sys',
@@ -54,59 +46,15 @@ const constantRoutes: CustomerRouteRecordRaw[] = [
     ],
   },
   {
-    path: '/message',
-    name: 'message',
-    meta: { title: '消息管理' },
+    path: '/redirect',
     component: Layout,
-    children: [
-      { path: 'platform', name: 'platform', meta: { title: '平台消息' }, component: () => import('@/views/sys/user/index.vue') },
-      { path: 'user', name: 'message_user', meta: { title: '用户消息' }, component: () => import('@/views/sys/user/index.vue') },
-    ],
-  },
-  {
-    path: '/coupon',
-    name: 'coupon',
-    meta: { title: '优惠券管理' },
-    component: Layout,
-    children: [{ path: 'manage', name: 'coupon_manage', meta: { title: '优惠券管理' }, component: () => import('@/views/sys/user/index.vue') }],
-  },
-  {
-    path: '/finance',
-    name: 'finance',
-    meta: { title: '财务管理' },
-    component: Layout,
-    children: [
-      { path: 'wallet', name: 'wallet', meta: { title: '平台钱包管理' }, component: () => import('@/views/sys/user/index.vue') },
-      { path: 'invoice', name: 'invoice', meta: { title: '菜单管理' }, component: () => import('@/views/sys/menu/index.vue') },
-      { path: 'tax', name: 'tax', meta: { title: '菜单管理' }, component: () => import('@/views/sys/menu/index.vue') },
-    ],
-  },
-  {
-    path: '/order',
-    name: 'order',
-    meta: { title: '订单管理' },
-    component: Layout,
-    children: [{ path: 'manage', name: 'order_manage', meta: { title: '订单管理' }, component: () => import('@/views/sys/user/index.vue') }],
-  },
-  {
-    path: '/consignor',
-    name: 'consignor',
-    meta: { title: '货主信息管理' },
-    component: Layout,
-    children: [{ path: 'manage', name: 'consignor_manage', meta: { title: '货主信息管理' }, component: () => import('@/views/sys/user/index.vue') }],
-  },
-  {
-    path: '/dirver',
-    name: 'dirver',
-    meta: { title: '司机信息管理' },
-    component: Layout,
-    children: [{ path: 'manage', name: 'dirver_manage', meta: { title: '司机信息管理' }, component: () => import('@/views/sys/user/index.vue') }],
-  },
-  {
-    path: '/login',
-    name: 'login',
     hidden: true,
-    component: () => import('@/views/login/index.vue'),
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: Redirect,
+      },
+    ],
   },
 ]
 

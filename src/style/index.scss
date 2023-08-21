@@ -1,6 +1,8 @@
 @import './global.scss';
 
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -21,7 +23,6 @@ html {
   height: 100%;
 }
 
-
 a:focus,
 a:active {
   outline: none;
@@ -37,4 +38,9 @@ a:hover {
 
 div:focus {
   outline: none;
+}
+ 
+.blue{
+  color: #1e93ef;
+  cursor: pointer;
 }

@@ -16,4 +16,5 @@ export const useAppSettingStore = defineStore({
       this.isMenuCollapse = !this.isMenuCollapse
     },
   },
+  persist: true,
 })

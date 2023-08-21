@@ -20,14 +20,25 @@
   border-radius: 5px;
 }
 .header-form-wrap {
+  @include wrap-border;
   margin: 0 0 10px;
   padding: 10px 10px 0;
-  border: 1px solid #ebeef5;
-  border-radius: 5px;
   .el-form-item--mini.el-form-item {
     margin-bottom: 10px;
   }
+  .el-form-item-btn{
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 18px;
+  }
 }
+
+.header-wrap{
+  @include wrap-border;
+  margin: 0 0 10px;
+  padding: 10px;
+}
+
 .page-wrap {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -37,4 +48,47 @@
 
 .el-form-item__label {
   font-weight: 700;
+}
+
+.flex-col-2 {
+  display: flex;
+  flex-wrap: wrap;
+  .el-form-item{
+    flex: 0 0 45%;
+    .el-input__wrapper{
+      width: 100%;
+    }
+    .el-date-editor .el-input__wrapper{
+      width: auto;
+    }
+  }
+}
+
+.el-form-item .el-select{
+  width: 100%;
+}
+
+// 上传按钮样式
+.el-button+.upload-button,
+.upload-button+.el-button
+{
+  margin-left: 12px;
+}
+
+.upload-button {
+  display: inline;
+}
+
+.el-input__wrapper {
+  position: relative;
+
+  .el-input__inner {
+    padding-right: 18px;
+  }
+  .el-input__suffix {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

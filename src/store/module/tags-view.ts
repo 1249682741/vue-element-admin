@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia'
 import { RouteRecordName } from 'vue-router'
-import { CustomerRouteMeta } from '@/router'
 
 export type TagView = {
   fullPath?: string
   path: string
   name: RouteRecordName | undefined | null
-  meta: CustomerRouteMeta
+  meta: CustomRouteMeta
   title?: string
   [propName: string]: any
 }
@@ -89,5 +88,10 @@ export const useTagsViewStore = defineStore({
         }
       }
     },
+    clear() {
+      this.visitedViews = []
+      this.cachedViews = []
+    },
   },
+  persist: true,
 })

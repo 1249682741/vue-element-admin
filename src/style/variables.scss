@@ -1,7 +1,6 @@
 :root {
-
   // sidebar
-  
+
   --el-menu-bg-color: #304156;
   --el-menu-text-color: #bfcbd9;
   --active-color: #409eff;
@@ -11,3 +10,8 @@
 $layout-menu-width: 230px;
 $layout-navbar-height: 50px;
 $layout-tags-view-height: 34px;
+
+@mixin wrap-border{
+  border: 1px solid #ebeef5;
+  border-radius: 5px;
+}

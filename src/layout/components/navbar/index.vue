@@ -1,20 +1,3 @@
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useAppSettingStore, useUserStore } from '@/store'
-import { storeToRefs } from 'pinia'
-import Breadcrumb from './breadcrumb/index.vue'
-
-const appSettingStore = useAppSettingStore()
-const { isMenuCollapse } = storeToRefs(appSettingStore)
-
-const iconName = computed(() => {
-  return isMenuCollapse.value ? 'expand' : 'fold'
-})
-
-const userStore = useUserStore()
-const { userName } = storeToRefs(userStore)
-</script>
-
 <template>
   <nav class="nav-wrap">
     <div class="lf-wrap">
@@ -27,24 +10,63 @@ const { userName } = storeToRefs(userStore)
       <el-dropdown>
         <p class="dropdown-wrap">
           <span class="name">
-            {{ userName }}
+            {{ userStore.userName }}
           </span>
           <el-icon>
             <arrow-down />
           </el-icon>
         </p>
         <template #dropdown>
+          <!-- <el-dropdown-menu>
+            <el-dropdown-item @click="clickModifyPasswordBtn">修改信息</el-dropdown-item>
+          </el-dropdown-menu> -->
           <el-dropdown-menu>
-            <el-dropdown-item @click="userStore.logout">修改信息</el-dropdown-item>
-          </el-dropdown-menu>
-          <el-dropdown-menu>
-            <el-dropdown-item divided @click="userStore.logout">退出登录</el-dropdown-item>
+            <el-dropdown-item divided @click="clickLogoutBtn">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
   </nav>
+  <ModifyPassword v-model:visible="showModifiyPasswordDialog" />
 </template>
+
+<script setup lang="ts" name="Navbar">
+import { computed, ref } from 'vue'
+import { useAppSettingStore, useUserStore } from '@/store'
+import { storeToRefs } from 'pinia'
+import Breadcrumb from './breadcrumb/index.vue'
+import { useRouter } from 'vue-router'
+import { ModifyPassword } from '@/components'
+import { logout } from '@/api/auth'
+import { ResponseCode } from '@/constant'
+
+const router = useRouter()
+const userStore = useUserStore()
+const appSettingStore = useAppSettingStore()
+const { isMenuCollapse } = storeToRefs(appSettingStore)
+
+const iconName = computed(() => {
+  return isMenuCollapse.value ? 'expand' : 'fold'
+})
+
+const showModifiyPasswordDialog = ref(false)
+
+function clickModifyPasswordBtn() {
+  showModifiyPasswordDialog.value = true
+}
+
+async function clickLogoutBtn() {
+  try {
+    const result = await logout()
+    if ((result.code = ResponseCode.OK)) {
+      userStore.logout()
+      router.push({ name: 'login' })
+    }
+  } catch (err) {
+    console.log('logout err', err)
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .nav-wrap {
@@ -67,6 +89,7 @@ const { userName } = storeToRefs(userStore)
 .dropdown-wrap {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
   span {
     margin: 0 10px 0 0;
   }

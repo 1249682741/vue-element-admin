@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useUserStore } from '@/store'
-
-const userStore = useUserStore()
+import { ResponseCode } from '@/constant'
+import { ElMessage } from 'element-plus'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -10,9 +10,8 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config: any) => {
-    if (userStore.token) {
-      config.headers['Authorization'] = userStore.token
-    }
+    const userStore = useUserStore()
+    config.headers['Authorization'] = userStore.token ? userStore.token : undefined
     return config
   },
   (error) => {
@@ -22,15 +21,37 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    if (response.status == 200) {
+    if (response.status == ResponseCode.OK) {
+      let { code } = response.data
+      if (code == ResponseCode.PermanentlyMoved) {
+        goToLoginPage()
+        return
+      }
       return response.data
     }
-    console.log('response', response)
     return response
   },
   (error) => {
     console.log('error', error)
+    if (!Object.prototype.hasOwnProperty.call(error, 'response')) {
+      ElMessage.error({ message: error.message })
+      return
+    }
+    let { status, data } = error.response
+    if ([ResponseCode.Unauthorized, ResponseCode.PermanentlyMoved, ResponseCode.ServiceUnavailable].includes(status)) {
+      goToLoginPage()
+      return
+    }
+    ElMessage.error({ message: data.msg })
+    return Promise.reject(data)
   }
 )
+
+function goToLoginPage() {
+  const userStore = useUserStore()
+  userStore.logout()
+  location.hash = '#/login'
+  location.reload()
+}
 
 export default service

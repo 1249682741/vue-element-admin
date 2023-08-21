@@ -2,14 +2,16 @@
 import { ref } from 'vue'
 import SidebarItem from './sidebar-item/index.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAppSettingStore } from '@/store'
+import { useAppSettingStore, useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const appSettingStore = useAppSettingStore()
 const { isMenuCollapse } = storeToRefs(appSettingStore)
+const userStore = useUserStore()
+
 const route = useRoute()
 const router = useRouter()
-const routes = ref(router.options.routes)
+const routes = [...router.options.routes, ...userStore.routes]
 </script>
 
 <template>

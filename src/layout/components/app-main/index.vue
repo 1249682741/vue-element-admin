@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-::v-deep .layout-main-scrollbar-wrap {
+:deep(.layout-main-scrollbar-wrap) {
   height: calc(100vh - $layout-navbar-height - $layout-tags-view-height);
 }
 .layout-main-wrap {

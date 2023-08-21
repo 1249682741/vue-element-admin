@@ -1,27 +1,41 @@
 import request from '@/utils/request'
-import { ListParams } from '@/types/sys/user'
+import { CancelTokenSource } from 'axios'
 
-export const list = (data: Partial<withPage<ListParams>> = {}) =>
+export const list = (data: Partial<User> = {}) =>
   request({
-    url: '/user',
+    url: '/sysUser/list',
     method: 'post',
     data,
   })
-export const add = (data: Partial<withPage<ListParams>> = {}) =>
-  request({
-    url: '/user',
+
+export const save = (data: User) => {
+  let url = data.userId ? '/sysUser/update' : '/sysUser/add'
+  return request({
+    url,
     method: 'post',
     data,
   })
-export const edit = (data: Partial<withPage<ListParams>> = {}) =>
+}
+
+export const del = (data: Pick<User, 'userId'>) =>
   request({
-    url: '/user',
+    url: '/sysUser/delete',
     method: 'post',
     data,
   })
-export const del = (id: string) =>
-  request({
-    url: '/user',
+
+export const fetchAuditList = (data: Partial<User>, cancelTokenSource?: CancelTokenSource) => {
+  return request({
+    url: '/sysUser/auditList',
     method: 'post',
-    data: { id },
+    data,
+    cancelToken: cancelTokenSource?.token,
+  })
+}
+
+export const fetchUserDeptRoleList = (data: Pick<User, 'userId'>) =>
+  request({
+    url: '/sysUser/userDeptRolelist',
+    method: 'post',
+    data,
   })

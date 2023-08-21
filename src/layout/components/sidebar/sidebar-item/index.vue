@@ -1,13 +1,12 @@
 <script setup lang="ts" name="sidebar-item">
 import { ref } from 'vue'
-import { type CustomerRouteRecordRaw } from '@/router'
 import SidebarIcon from '../icon/index.vue'
 import SidebarLink from '../link/index.vue'
 import { isExternal } from '@/utils/validate'
 import { resolve } from '@/utils'
 
 type Props = {
-  item: CustomerRouteRecordRaw
+  item: CustomRouteRecordRaw
   basePath?: string
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -15,11 +14,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const isSingleRoute = ref<boolean>(true)
-const singleRoute = ref<CustomerRouteRecordRaw>(props.item)
-const multipleRoute = ref<CustomerRouteRecordRaw>(props.item)
+const singleRoute = ref<CustomRouteRecordRaw>(props.item)
+const multipleRoute = ref<CustomRouteRecordRaw>(props.item)
 const currentPath = ref<string>('')
 
-const init = (route: CustomerRouteRecordRaw, basePath: string) => {
+const init = (route: CustomRouteRecordRaw, basePath: string) => {
   // 若路由为 hidden 则 直接return
   if (route.hidden) return
   let resolvePath = resolve(basePath, route.path)
@@ -35,7 +34,7 @@ const init = (route: CustomerRouteRecordRaw, basePath: string) => {
   // 下面是有 children 的情况
   // 当下子孩的长度为 1 且 当前节点 alwaysShow 不为 true, 则直接展示单节点
   if (route.children.length == 1 && !route.alwaysShow) {
-    init(route.children[0] as CustomerRouteRecordRaw, resolvePath)
+    init(route.children[0] as CustomRouteRecordRaw, resolvePath)
   } else {
     // 子孩长度大于 1 或 当前节点是 alwaysShow 的情况, 则直接展示多节点
     isSingleRoute.value = false

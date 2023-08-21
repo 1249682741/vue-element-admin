@@ -1,27 +1,32 @@
 import request from '@/utils/request'
-import { ListParams } from '@/types/sys/menu'
 
-export const list = (data: Partial<withPage<ListParams>> = {}) =>
+export const list = (data: Partial<withPage<Menu>> = {}) =>
   request({
-    url: '/menu',
+    url: '/menu/list',
     method: 'post',
     data,
   })
-export const add = (data: Partial<withPage<ListParams>> = {}) =>
-  request({
-    url: '/menu',
+
+//新增 | 保存
+export const save = (data: Menu) => {
+  let url = data.menuId ? '/menu/update' : '/menu/add'
+  return request({
+    url,
     method: 'post',
     data,
   })
-export const edit = (data: Partial<withPage<ListParams>> = {}) =>
+}
+
+export const del = (data: Pick<Menu, 'menuId'>) =>
   request({
-    url: '/menu',
+    url: `/menu/delete`,
     method: 'post',
     data,
   })
-export const del = (id: string) =>
+
+export const allMenu = (data: Partial<Menu> = {}) =>
   request({
-    url: '/menu',
+    url: '/menu/allMenu',
     method: 'post',
-    data: { id },
+    data,
   })

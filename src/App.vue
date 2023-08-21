@@ -1,11 +1,11 @@
-<script setup lang="ts">
-import zhCN from 'element-plus/lib/locale/lang/zh-cn'
-</script>
-
 <template>
   <el-config-provider :locale="zhCN">
-    <router-view />
+    <Suspense>
+      <router-view />
+    </Suspense>
   </el-config-provider>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import zhCN from 'element-plus/dist/locale/zh-cn.mjs'
+</script>
